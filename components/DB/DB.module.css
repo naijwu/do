@@ -1,0 +1,92 @@
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: stretch;
+    justify-self: flex-end;
+}
+.container.expanded {
+    height: calc(50vh - 1.5rem);
+}
+
+.dbWrapper {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: stretch;
+    justify-self: flex-end;
+}
+.peep {
+    font-size: 0.8rem;
+    cursor: pointer;
+    padding: 1rem;
+}
+.text {
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.table {
+    width: 100%;
+}
+
+.table tr th {
+    text-align: left;
+    font-size: 0.8rem;
+    font-weight: normal;
+    color: #777;
+}
+
+.table tr td {
+    padding-right: 0.5rem;
+    font-size: 0.8rem;
+}
+
+.interactive {
+    position: relative;
+    overflow-x: hidden;
+    height: 100%;
+}
+
+.panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    border-style: none none none solid;
+    border-width: 1px;
+    border-color: #CCC;
+    background: white;
+    padding: 1rem;
+
+    transform: translateX(100%);
+    transition: all 0.25s ease-in-out;
+}
+.panel.opened {
+    transform: translateX(0);
+}
+
+.panelText {
+    font-size: 0.8rem;
+    padding-bottom: 1rem;
+}
+
+.new {
+    font-size: 0.8rem;
+    color: #777;
+    cursor: pointer;
+}
+
+.input {
+    flex-grow: 1;
+    border: none;
+    font-size: 0.8rem;
+    outline: none;
+    padding: 0.1rem;
+}
+.input:focus {
+    background: #EEE;
+}

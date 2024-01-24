@@ -1,0 +1,40 @@
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: stretch;
+    min-height: calc(50vh - 1rem);
+    flex-grow: 1;
+    
+    position: relative;
+    border-style: none none solid none;
+    border-width: 1px;
+    border-color: #ebebeb;
+}
+
+.text {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 2;
+    font-size: 0.8rem;
+}
+
+.ta {
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    flex-grow: 1;
+    padding: 1rem;
+    padding-top: 2.5rem;
+    outline: none;
+    border: none;
+    resize: none;
+
+    font-size: 0.8rem;
+    font-family: "Inter", sans-serif;
+}
