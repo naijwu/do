@@ -8,7 +8,6 @@ import { saveTodo, getTodo } from "@/util/firebase";
 export default function Daily() {
 
     const [text, setText] = useState<string>('');
-    const [refresh, setRefresh] = useState<boolean>(false);
 
     async function getData() {
         const data = await getTodo();
@@ -29,7 +28,6 @@ export default function Daily() {
 
     return (
         <div className={styles.container}>
-            <div className={styles.text}>(daily)</div>
             <textarea 
                 className={styles.ta} 
                 value={text} 

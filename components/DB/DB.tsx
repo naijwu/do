@@ -9,10 +9,35 @@ export default function DB() {
 
     const [data, setData] = useState<any[]>();
     const [refresh, setRefresh] = useState<boolean>(false);
+    const [showDone, setShowDone] = useState<boolean>(true);
 
     async function getData() {
         const data = await getItems();
-        console.log(data)
+
+        // sort by courses (groups them up)
+        data.sort((a, b) => a.course - b.course)
+
+        // sort by status
+        let status: any = {
+            'progress': 4,
+            'queued': 3,
+            'done': 2,
+            'unfinished': 1,
+        };
+        data.sort((a, b) => status[b.status] - status[a.status])
+
+        // sort by due
+        data.sort((a, b) => {
+            try {
+                const aT = new Date(a.due).getTime();
+                const bT = new Date(b.due).getTime();
+                // if (aT > new Date().getTime() || bT > new Date().getTime()) return 0;
+                return aT == bT ? 0 : aT < bT ? 1 : -1;
+            } catch(e) {
+                return 0;
+            }
+        })
+
         setData(data);
     }
 
@@ -68,6 +93,7 @@ export default function DB() {
                     {/* Tasks */}
                     <div className={styles.dbWrapper}>
                         <div className={styles.text} onClick={()=>setHide(!hide)}>(db)</div>
+                        <div className={styles.text} onClick={()=>setShowDone(!showDone)}>{showDone ? 'show unfinished' : 'show finished' }</div>
                         <table className={styles.table}>
                             <tr>
                                 <th>title</th>
@@ -77,7 +103,7 @@ export default function DB() {
                                 <th>due</th>
                                 <th>status</th>
                             </tr>
-                            {data?.map((item, index) => (
+                            {data?.map((item, index) => ((!showDone && item.status != 'done') || showDone) && (
                                 <tr key={index}>
                                     <td onClick={()=>selectItem(item)}>{item.title}</td>
                                     <td>{item.type}</td>
@@ -110,7 +136,7 @@ export default function DB() {
                                         alignItems: 'center'
                                     }}>
                                         <div style={{
-                                            minWidth: 150
+                                            minWidth: 120
                                         }}>{k}</div>
                                         <input className={styles.input} type="text" value={selected[k]} onChange={e=>handleEdit(k, e.currentTarget.value)} />
                                     </div>

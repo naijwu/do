@@ -1,5 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { GoogleAuthProvider } from "firebase/auth/cordova";
 import { getDatabase } from "firebase/database";
 import { collection, doc, getDoc, getDocs, getFirestore, query, setDoc } from "firebase/firestore";
 import { v4 as uuidv4 } from 'uuid';
@@ -24,6 +26,8 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const rtdb = getDatabase(app);
 export const db = getFirestore(app);
+export const provider = new GoogleAuthProvider();
+export const auth = getAuth();
 
 
 // firestore stuff
@@ -51,6 +55,7 @@ export async function getItems() {
 }
 
 export async function newItem(item: any) {
+  if (item.title == '') return;
   const newId = uuidv4();
   await setDoc(doc(db, "db", newId), {id: newId, ...item});
 }
