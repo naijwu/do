@@ -5,8 +5,8 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 export default function AuthPage() {
 
-    function loginWithGoogle() {
-        signInWithPopup(auth, provider)
+    async function loginWithGoogle() {
+        await signInWithPopup(auth, provider)
           .then((result) => {
             // This gives you a Google Access Token. You can use it to access the Google API.
             const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -28,7 +28,7 @@ export default function AuthPage() {
     }
 
     return (
-        <div onClick={loginWithGoogle}>
+        <div onClick={async ()=> await loginWithGoogle()}>
             login with g
         </div>
     )
